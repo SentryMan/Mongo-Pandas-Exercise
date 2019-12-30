@@ -27,7 +27,7 @@ nulls.info()
 mdf = mdf[mdf.RealID != -1]
 mdf.info()
 
-
+mdf["s"].value_counts()
 
 
 "Turns it into csv"
