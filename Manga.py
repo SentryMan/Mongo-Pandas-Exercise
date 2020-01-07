@@ -42,11 +42,22 @@ for percent in percents:
 
 
 
-"""Get Top 20 most popular"""
-top20 = mdf.sort_values(by=['h'], ascending=False).head(20)
+"""Get Top 20 most popular In categories"""
 
-top20.corr()
+def getTop20(*args):
+    
+    top20 = mdf
+    
+    for cat in args:
+    
+        top20['flag'] = top20.c.apply(lambda l:
+                True if cat in l else False )    
+        
+        top20 = top20[top20.flag == True]
+    
+    return top20.head(20).sort_values(by=['h'], ascending=False)
 
+top20 = getTop20("Comedy", "Action", "Adventure", 'Shounen')
 
 
 
