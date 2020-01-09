@@ -42,7 +42,7 @@ for percent in percents:
 
 
 
-"""Get Top 20 most popular In categories"""
+"""Get Top 20 most popular In categories and plot category stats"""
 
 def getTop20(*args):
     
@@ -57,7 +57,28 @@ def getTop20(*args):
     
     return top20.head(20).sort_values(by=['h'], ascending=False)
 
-top20 = getTop20("Comedy", "Action", "Adventure", 'Shounen')
+
+def plotPopular(*args):
+    
+    meanList = []
+    genreList = []
+    
+    for cat in args:
+        meanList.append(getTop20(cat)['h'].mean())
+        genreList.append(cat)
+        
+    plt.xlabel("Genre")
+    plt.ylabel("Average Views")
+    plt.bar(genreList, meanList)
+    plt.show()
+
+
+plotPopular("Action", "Adventure", "Romance", "Comedy", "Supernatural" )
+
+
+
+
+
 
 
 
